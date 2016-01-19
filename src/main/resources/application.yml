@@ -1,0 +1,6 @@
+spring:
+  metrics:
+    export:
+      statsd:
+        host: localhost
+        port: 8125
