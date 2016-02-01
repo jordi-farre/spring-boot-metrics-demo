@@ -1,5 +1,6 @@
 package com.jordifr.spring.metrics.service;
 
+import com.codahale.metrics.annotation.Timed;
 import com.jordifr.spring.metrics.entity.ActionEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +29,13 @@ public class MetricsServiceImpl implements MetricsService {
 
     @Async
     @Override
+    @Timed(name = "action.time")
     public void execute(ActionEnum action) {
         long init = System.currentTimeMillis();
         Random random = new Random();
         boolean result = random.nextBoolean();
         int delay = random.nextInt(5000);
+        // test
         if (result) {
             this.log.info("Action " + action.name() + " finalizado correctamente");
             this.counterService.increment("action." + action.name().toLowerCase() + ".ok");
